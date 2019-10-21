@@ -14,7 +14,7 @@ const configFile = path.resolve(Helper.getPackagesPath(), "giphy.json");
 
 let config = {
     apiKey: "your-api-key",
-    rating: "g",
+    rating: "G",
 };
 let thelounge = null;
 
