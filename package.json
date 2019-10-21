@@ -1,6 +1,6 @@
 {
     "name": "thelounge-plugin-giphy",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Simple plugin for the irc client thelounge that allows you to quickly look up giphy-gifs",
     "main": "index.js",
     "repository": "https://github.com/MiniDigger/thelounge-plugin-giphy.git",
