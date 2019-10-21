@@ -1,0 +1,25 @@
+{
+    "name": "thelounge-plugin-giphy",
+    "version": "1.0.0",
+    "description": "Simple plugin for the irc client thelounge that allows you to quickly look up giphy-gifs",
+    "main": "index.js",
+    "repository": "https://github.com/MiniDigger/thelounge-plugin-giphy.git",
+    "author": "MiniDigger <admin@minidigger.me>",
+    "homepage": "https://minidigger.github.io/thelounge-plugin-giphy",
+    "license": "MIT",
+    "keywords": [
+        "thelounge",
+        "thelounge-plugin",
+        "minidigger"
+    ],
+    "bugs": {
+        "url": "https://github.com/MiniDigger/thelounge-plugin-giphy/issues"
+    },
+    "thelounge": {
+        "name": "Giphy",
+        "type": "plugin"
+    },
+    "dependencies": {
+        "thelounge": "3.2.0"
+    }
+}
