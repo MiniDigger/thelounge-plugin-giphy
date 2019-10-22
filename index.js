@@ -64,13 +64,15 @@ function getGif(term) {
         });
         axios.get('http://api.giphy.com/v1/gifs/search?' + args)
             .then(function (response) {
-                if (response && response.data && response.data.data && response.data.data.embed_url) {
-                    resolve(response.data.data.embed_url);
+                if (response && response.data && response.data.data && response.data.data && response.data.data[0]) {
+                    resolve(getGifUrl(response.data.data[0]));
                 } else {
                     reject("Error while getting gif: " + response);
                 }
             })
             .catch(function (error) {
+                console.log("test2");
+                console.log(error);
                 reject("Error while getting gif: " + error);
             });
     });
@@ -84,8 +86,8 @@ function getRandomGif() {
         });
         axios.get('http://api.giphy.com/v1/gifs/random?' + args)
             .then(function (response) {
-                if (response && response.data && response.data.data && response.data.data.embed_url) {
-                    resolve(response.data.data.embed_url);
+                if (response && response.data && response.data.data) {
+                    resolve(getGifUrl(response.data.data));
                 } else {
                     reject("Error while getting gif: " + response);
                 }
@@ -94,6 +96,14 @@ function getRandomGif() {
                 reject("Error while getting gif: " + error);
             });
     });
+}
+
+function getGifUrl(data) {
+    if (data.type === "gif") {
+        return "https://i.giphy.com/" + data.id + ".gif";
+    } else {
+        return data.embed_url;
+    }
 }
 
 const giphyCommand = {
@@ -126,6 +136,8 @@ const giphyCommand = {
             case "search":
                 if (args.length === 1) {
                     sendErrorMessage("Usage: /giphy search <term>", target.chan, client);
+                } else if (config.apiKey === 'your-api-key') {
+                    sendErrorMessage("Please set your api key using /giphy <key>", target.chan, client);
                 } else {
                     getGif(args.splice(1).join(" "))
                         .then(gif => client.runAsUser(gif, target.chan.id))
@@ -133,9 +145,13 @@ const giphyCommand = {
                 }
                 break;
             case "random":
-                getRandomGif()
-                    .then(gif => client.runAsUser(gif, target.chan.id))
-                    .catch(error => sendErrorMessage(error, target.chan, client));
+                if (config.apiKey === 'your-api-key') {
+                    sendErrorMessage("Please set your api key using /giphy <key>", target.chan, client);
+                } else {
+                    getRandomGif()
+                        .then(gif => client.runAsUser(gif, target.chan.id))
+                        .catch(error => sendErrorMessage(error, target.chan, client));
+                }
                 break;
             default:
                 sendErrorMessage("Usage: /giphy <random|search|rating|key>", target.chan, client);

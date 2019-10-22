@@ -1,2 +1,4 @@
 node_modules/
 .vscode/
+renovate.json
+_config.yml
