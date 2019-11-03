@@ -96,52 +96,52 @@ function getGifUrl(data) {
 const giphyCommand = {
     input: function (client, target, command, args) {
         if (args.length === 0) {
-            client.sendMessage(red + "Usage: /giphy <random|search|rating|key>", target.chan, "Giphy");
+            client.sendMessage(red + "Usage: /giphy <random|search|rating|key>", target.chan);
             return;
         }
         switch (args[0]) {
             case "key":
                 if (args.length === 1) {
-                    client.sendMessage(red + "Usage: /giphy key <your-api-key>", target.chan, "Giphy");
-                    client.sendMessage("For more info see <someurl>", target.chan, "Giphy");
+                    client.sendMessage(red + "Usage: /giphy key <your-api-key>", target.chan);
+                    client.sendMessage("For more info see <someurl>", target.chan);
                 } else {
                     config.apiKey = args[1];
                     saveConfig();
-                    client.sendMessage("API Key set. Happy giphying!", target.chan, "Giphy");
+                    client.sendMessage("API Key set. Happy giphying!", target.chan);
                 }
                 break;
             case "rating":
                 if (args.length === 1 || !ratings.includes(args[1])) {
-                    client.sendMessage(red + "Usage: /giphy rating <" + ratings.join("|") + ">", target.chan, "Giphy");
-                    client.sendMessage("For more info see https://developers.giphy.com/docs/optional-settings#rating", target.chan, "Giphy");
+                    client.sendMessage(red + "Usage: /giphy rating <" + ratings.join("|") + ">", target.chan);
+                    client.sendMessage("For more info see https://developers.giphy.com/docs/optional-settings#rating", target.chan);
                 } else {
                     config.rating = args[1];
                     saveConfig();
-                    client.sendMessage("Rating set to " + config.rating, target.chan, "Giphy");
+                    client.sendMessage("Rating set to " + config.rating, target.chan);
                 }
                 break;
             case "search":
                 if (args.length === 1) {
-                    client.sendMessage(red + "Usage: /giphy search <term>", target.chan, "Giphy");
+                    client.sendMessage(red + "Usage: /giphy search <term>", target.chan);
                 } else if (config.apiKey === 'your-api-key') {
-                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan, "Giphy");
+                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan);
                 } else {
                     getGif(args.splice(1).join(" "))
                         .then(gif => client.runAsUser(gif, target.chan.id))
-                        .catch(error => client.sendMessage(red + error, target.chan, "Giphy"));
+                        .catch(error => client.sendMessage(red + error, target.chan));
                 }
                 break;
             case "random":
                 if (config.apiKey === 'your-api-key') {
-                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan, "Giphy");
+                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan);
                 } else {
                     getRandomGif()
                         .then(gif => client.runAsUser(gif, target.chan.id))
-                        .catch(error => client.sendMessage(red + error, target.chan, "Giphy"));
+                        .catch(error => client.sendMessage(red + error, target.chan));
                 }
                 break;
             default:
-                client.sendMessage(red + "Usage: /giphy <random|search|rating|key>", target.chan, "Giphy");
+                client.sendMessage(red + "Usage: /giphy <random|search|rating|key>", target.chan);
                 break;
         }
     },
