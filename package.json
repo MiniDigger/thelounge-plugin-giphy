@@ -15,9 +15,6 @@
     "bugs": {
         "url": "https://github.com/MiniDigger/thelounge-plugin-giphy/issues"
     },
-    "scripts": {
-        "postversion": "git push --tags"
-    },
     "thelounge": {
         "name": "Giphy",
         "type": "plugin"
