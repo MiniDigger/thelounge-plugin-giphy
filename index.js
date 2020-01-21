@@ -124,7 +124,7 @@ const giphyCommand = {
                 if (args.length === 1) {
                     client.sendMessage(red + "Usage: /giphy search <term>", target.chan);
                 } else if (config.apiKey === 'your-api-key') {
-                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan);
+                    client.sendMessage(red + "Please set your api key using /giphy key <your-api-key>", target.chan);
                 } else {
                     getGif(args.splice(1).join(" "))
                         .then(gif => client.runAsUser(gif, target.chan.id))
@@ -133,7 +133,7 @@ const giphyCommand = {
                 break;
             case "random":
                 if (config.apiKey === 'your-api-key') {
-                    client.sendMessage(red + "Please set your api key using /giphy <key>", target.chan);
+                    client.sendMessage(red + "Please set your api key using /giphy key <your-api-key>", target.chan);
                 } else {
                     getRandomGif()
                         .then(gif => client.runAsUser(gif, target.chan.id))
