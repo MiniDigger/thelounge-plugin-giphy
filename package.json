@@ -20,7 +20,7 @@
         "type": "plugin"
     },
     "dependencies": {
-        "axios": "^0.19.0",
+        "axios": "^0.21.0",
         "qs": "^6.9.0",
         "thelounge": "^4.0.0"
     }
